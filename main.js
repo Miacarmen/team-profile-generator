@@ -1,16 +1,11 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const Employee = require("../lib/employee");
+const Employee = require("../lib/Employee");
 
-
-
-// WHEN I am prompted for my team members and their information
-
-// WHEN I decide to finish building my team
-// THEN I exit the application, and the HTML is generated that displays a nicely formatted team roster based on user input
-
+// user prompted for team members and their information
 // get client input data
-const questions = ([
+inquirer
+.prompt([
   {
     type: "input",
     name: "name",
@@ -27,6 +22,16 @@ const questions = ([
     type: "input",
     name: "email",
     message: "Enter employee's email:",
+    validate: function (email) {
+      valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+
+      if (valid) {
+        return true;
+      } else {
+        console.log("Not a valid email. Please try again");
+        return false;
+      }
+    },
   },
 
   {
@@ -36,23 +41,56 @@ const questions = ([
     choices: ["Manager", "Engineer", "Intern"],
     // if epmloyee type === Manager
     // ask questions + manager questions
-
-    // if employee type === Engineer
+    when: (answers) => answers.roletype === ('Manager').then(() => {
+        new inquirer.prompt([
+            {
+                type: 'number',
+                name: 'officeNumber',
+                message: 'Enter Manager\'s office number'
+            }
+        ])
+    }),
+     // if employee type === Engineer
     // ask questions + engineer questions
-
+    when: (answers) => answers.roletype === ('Engineer').then(() => {
+        new inquirer.prompt([
+            {
+                type: 'input',
+                name: 'github',
+                message: 'Enter Engineer\'s GitHub username'
+            }
+        ])
+    }),
     // if employee type === Intern
     // ask questions + intern questions
-  }
-  // then use responses to populate html cards
-]);
-
-
-function init() {
-    inquirer.prompt(questions).then((response) => {
-        const data = generateHtml(response);
-        writeToFile(data);
+    when: (answers) => answers.roletype === ('Intern').then(() => {
+        new inquirer.prompt([
+            {
+                type: 'input',
+                name: 'school',
+                message: 'Enter the name of the school this Intern is currently attending'
+            }
+        ])
     })
-}
+  },
+  // add question to exit or add another team member
+  {
+    type: "confirm",
+    name: "",
+    message: "Would you like to add another Team Member?"
+    // if yes, restart prompt
+    // if no, prompt with another question to exit
+  },
+
+])
+.then((answers) => {
+  const data = generateHtml(answers);
+  writeToFile(data);
+});
+
+// WHEN I decide to finish building my team
+// THEN I exit the application, and the HTML is generated that displays a nicely formatted team roster based on user input
+
 
 
 function writeHtmlFile(data) {
@@ -65,8 +103,8 @@ function writeHtmlFile(data) {
   });
 }
 
-
 // render HTML document with input responses
+// use responses to populate html cards
 function generateHtml(inputObj) {
   console.log(inputObj);
 
@@ -97,12 +135,12 @@ function generateHtml(inputObj) {
           <div class="col-sm-6">
             <div class="card" style="max-width: 18rem;">
               <div class="card-header text-white bg-dark">
-                Name<br>
-                Role
+                ${data.name}<br>
+                ${data.role}
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID</li>
-                <li class="list-group-item">Email</li>
+                <li class="list-group-item">${data.id}</li>
+                <li class="list-group-item">${data.email}</li>
                 <li class="list-group-item">Other</li>
               </ul>
             </div>
