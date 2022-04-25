@@ -3,13 +3,14 @@ const fs = require("fs");
 const Employee = require("../lib/employee");
 
 
+
 // WHEN I am prompted for my team members and their information
 
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated that displays a nicely formatted team roster based on user input
 
 // get client input data
-inquirer.prompt([
+const questions = ([
   {
     type: "input",
     name: "name",
@@ -29,6 +30,10 @@ inquirer.prompt([
   },
 
   {
+    type: "list",
+    name: "role",
+    message: "Select Employee's role from the list below",
+    choices: ["Manager", "Engineer", "Intern"],
     // if epmloyee type === Manager
     // ask questions + manager questions
 
@@ -37,18 +42,17 @@ inquirer.prompt([
 
     // if employee type === Intern
     // ask questions + intern questions
-    type: "list",
-    name: "role",
-    message: "Select Employee's role from the list below",
-    choices: ["Manager", "Engineer", "Intern"],
   }
   // then use responses to populate html cards
-  .then((response) => {
-    console.log(response);
-    const data = new Employee(response);
-    writeToFile(data);
-  }),
 ]);
+
+
+function init() {
+    inquirer.prompt(questions).then((response) => {
+        const data = generateHtml(response);
+        writeToFile(data);
+    })
+}
 
 
 function writeHtmlFile(data) {
