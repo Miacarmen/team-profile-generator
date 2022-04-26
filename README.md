@@ -63,11 +63,13 @@ Open the index.html in your browser to view your newly created and styled Team P
 
 ## Features
 
+![Walkthrough](team-gen-walkthrough.gif)
 
 ## Contributers
 
 This application was developed by Mia Carmen
-[GitHub](https://github.com/Miacarmen) 
+<br />
+Find me on [GitHub](https://github.com/Miacarmen) 
 
 ## Licenses
 
