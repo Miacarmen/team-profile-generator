@@ -48,7 +48,7 @@ function generateHtml(array) {
     
       <div class="container">
         <div class="jumbotron" style="background-color: rgb(244, 227, 244)">
-          <h1 class="display-4 text-center">My Team</h1>
+          <h1 class="display-4 text-center"><strong>My Team</strong></h1>
     
           <hr class="my-4">
     
