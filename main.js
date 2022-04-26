@@ -16,6 +16,15 @@ function init() {
         type: "input",
         name: "name",
         message: "Enter employee's name:",
+        validate: function(name) {
+          valid = /[a-zA-Z]+/.test(name);
+          if(valid) {
+            return true;
+          } else {
+            console.log("Please enter a valid Name. No numbers or characters.");
+            return false;
+          }
+        }
       },
 
       {
@@ -65,7 +74,7 @@ function init() {
         name: "school",
         message:
           "Enter the name of the school this Intern is currently attending",
-          when: (answers) => answers.role === 'Intern'
+          when: (answers) => answers.role === 'Intern',
       },
       
     ])

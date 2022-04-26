@@ -23,19 +23,22 @@ A Node.js command-line application that helps users build out stat cards for the
 3. Clone the repo onto your local machine
 4. Open the files in VS Code or your preferred editor
 5. Using the command-line navigate into the assets folder
-6. Install npm package dependencies by using the following command
+6. Install npm package dependencies by using the following command:
 
 ```bash
 npm install
 ```
+7. Install Inquirer package by using the following command:
 
-7. Run the application by using the following command:
+```bash
+npm i inquirer
+```
+
+8. Run the application by using the following command:
 
 ```bash
 node main.js
 ```
-
-
 
 
 
@@ -64,7 +67,7 @@ Open the index.html in your browser to view your newly created and styled Team P
 ## Contributers
 
 This application was developed by Mia Carmen
-Find me on [GitHub](https://github.com/Miacarmen) 
+[GitHub](https://github.com/Miacarmen) 
 
 ## Licenses
 

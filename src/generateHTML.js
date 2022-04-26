@@ -20,7 +20,7 @@ function generateHtml(array) {
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${employee.getId()}</li>
-            <li class="list-group-item">Email: <a href="#">${employee.getEmail()}</a></li>
+            <li class="list-group-item">Email: <a href="mailto:myemailaddress@gmail.com" target="_blank">${employee.getEmail()}</a></li>
             ${other}
           </ul>
         </div>
