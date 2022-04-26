@@ -1,34 +1,36 @@
+// create html document based on user input
 function generateHtml(array) {
-  
-    var employeeCards = ``;
-    array.forEach((employee) => {
-        var other = ``;
-        if(employee.getRole() === "Manager") {
-            other = `<li class="list-group-item">Office Number: ${employee.getOfficeNumber()}</li>`
-        } else if(employee.getRole() === "Engineer") {
-            other = `<li class="list-group-item">GitHub: ${employee.getGithub()}</li>`
-        } else {
-            other = `<li class="list-group-item">Office School: ${employee.getSchool()}</li>`
-        }
+  var employeeCards = ``;
+  array.forEach((employee) => {
+    var other = ``;
+    if (employee.getRole() === "Manager") {
+      other = `<li class="list-group-item">Office Number: ${employee.getOfficeNumber()}</li>`;
+    } else if (employee.getRole() === "Engineer") {
+      other = `<li class="list-group-item">GitHub: <a href="#">${employee.getGithub()}</a></li>`;
+    } else {
+      other = `<li class="list-group-item">School: ${employee.getSchool()}</li>`;
+    }
 
-        var card = ` <div class="col-sm-6">
+    // create new employee card
+    var card = ` <div class="mx-2 mb-3">
         <div class="card" style="max-width: 18rem;">
           <div class="card-header text-white bg-dark">
             ${employee.getName()}<br>
             ${employee.getRole()}
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">${employee.getId()}</li>
-            <li class="list-group-item">${employee.getEmail()}</li>
+            <li class="list-group-item">ID: ${employee.getId()}</li>
+            <li class="list-group-item">Email: <a href="#">${employee.getEmail()}</a></li>
             ${other}
           </ul>
         </div>
-      </div>`
+      </div>`;
 
-      employeeCards += card;
-    })
+    employeeCards += card;
+  });
 
-    const htmlStr = `<!doctype html>
+  // html string populated with employee cards
+  const htmlStr = `<!doctype html>
     <html lang="en">
     
     <head>
@@ -39,22 +41,21 @@ function generateHtml(array) {
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     
-        <link rel="stylesheet" href="./assets/styles.css">
-      <title>Hello, world!</title>
+      <title>My Team</title>
     </head>
     
-    <body>
+    <body style="font-family: Verdana, Geneva, Tahoma, sans-serif">
     
       <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color: rgb(244, 227, 244)">
           <h1 class="display-4 text-center">My Team</h1>
     
           <hr class="my-4">
     
-          <div class="row">
+          <div class="d-flex mt-5 justify-content-center">
            ${employeeCards}
           </div>
-    
+        <div>
         </div>
       </div>
     
@@ -70,8 +71,8 @@ function generateHtml(array) {
     </body>
     
     </html>`;
-  
-    return htmlStr;
-  }
 
-  module.exports = generateHtml;
+  return htmlStr;
+}
+
+module.exports = generateHtml;
