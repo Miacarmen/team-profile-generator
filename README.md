@@ -63,8 +63,7 @@ Open the index.html in your browser to view your newly created and styled Team P
 
 ## Features
 
-![Walkthrough](team-gen-walkthrough.gif)
-
+![Walkthrough](./assets/images/team-gen-vid.gif)
 ## Contributers
 
 This application was developed by Mia Carmen
